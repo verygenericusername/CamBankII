@@ -1,8 +1,27 @@
 <html>
 <head>
-<title>Cam-Bank II</title>
-<link rel="stylesheet" href="scripts/style.css">
-<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+<style>
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform:rotate(360deg);
+  }
+}
+.loading {
+  width:120px;
+  height:120px;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius:50%;
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin: -76px 0 0 -76px;
+  animation: rotate 1s infinite;
+}
+</style>
 </head>
 <body>
 <center class="loginpage">
@@ -22,8 +41,8 @@
   Login
   </button>
   <br>
-  <p class="error" style="color:red; display:none;">
-  Error logging in.
+  <p class="error">
+  If loading is stuck, either your connection is slow or login has failed.
   </p>
 </center>
 <center class="loading" style="display:none;"></center>
@@ -87,9 +106,6 @@ exit.removeEventListener("click", exitPage);
 exit.addEventListener("click", exitPage);
 }
 }else {
-loading.style.display = "none";
-loginpage.style.display = "";
-error.style.display = "";
 }
 }
 });
