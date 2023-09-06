@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Cam-Bank II</title>
+<link rel="stylesheet" href="scripts/style.css">
+<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+</head>
+<body>
+<center class="loginpage">
+  <h1>
+  Cam-Bank Login
+  </h1>
+  <br>
+  <br>
+  Name: <input type="text" class="user">
+  <br>
+  Cam-Bank ID: <input type="number" class="id"> (IMPORTANT!)
+  <br>
+  Password: <input type="password" class="password">
+  <br>
+  <br>
+  <button class="login">
+  Login
+  </button>
+  <br>
+  <p class="error" style="color:red; display:none;">
+  Error logging in.
+  </p>
+</center>
+<center class="loading" style="display:none;"></center>
+<center class="bankpage" style="display:none;">
+  <h1 class="username">
+  Welcome, User!
+  </h1>
+  <br>
+  <br>
+  <h2 class="balance">
+  Balance: 0
+  </h2>
+  <br>
+  <br>
+  <h4>
+  come to me or email me to adjust your balance!
+  </h4>
+  <br>
+  <br>
+  <button class="exit">
+  Exit
+  </button>
+</center>
+<script>
+var loginpage = document.querySelector(".loginpage");
+var user = document.querySelector(".user");
+var id = document.querySelector(".id");
+var password = document.querySelector(".password");
+var login = document.querySelector(".login");
+var error = document.querySelector(".error");
+var loading = document.querySelector(".loading");
+var bankpage = document.querySelector(".bankpage");
+var username = document.querySelector(".username");
+var balance = document.querySelector(".balance");
+var exit = document.querySelector(".exit");
+
+
+login.addEventListener("click", function(){
+if(name.value !== "" && id.value !== "" && password.value !== ""){
+loginpage.style.display = "none";
+loading.style.display = "";
+fetch("https://verygenericusername.github.io/Cam-BankAPI/CamBankData.json").then((response) => response.json()).then(data => {
+for(let i = 0; i < data.users.length; i++){
+if(id.value === data.users[i].id && password.value === data.users[i].password){
+if(user.value === data.users[i].user){
+error.style.display = "none";
+loading.style.display = "none";
+bankpage.style.display = "";
+username.innerHTML = "Welcome, " + data.users[i].user + "!";
+balance.innerHTML = "Balance: " + data.users[i].balance;
+function exitPage(){
+username.innerHTML = "";
+balance.innerHTML = "";
+bankpage.style.display = "none";
+loginpage.style.display = "";
+password.value = "";
+user.value = "";
+id.value = "";
+exit.removeEventListener("click", exitPage);
+}
+exit.addEventListener("click", exitPage);
+}
+}else {
+loading.style.display = "none";
+loginpage.style.display = "";
+error.style.display = "";
+}
+}
+});
+}
+});
+</script>
+</body>
+</html>
