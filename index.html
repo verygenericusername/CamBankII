@@ -87,7 +87,7 @@ loading.style.display = "";
 fetch("https://verygenericusername.github.io/Cam-BankAPI/CamBankData.json").then((response) => response.json()).then(data => {
 for(let i = 0; i < data.users.length; i++){
 if(id.value === data.users[i].id && password.value === data.users[i].password){
-if(user.value === data.users[i].user){
+if(user.value === data.users[i].user.toLowerCase()){
 error.style.display = "none";
 loading.style.display = "none";
 bankpage.style.display = "";
